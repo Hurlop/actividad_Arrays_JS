@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./scripts/script.js" async></script>
+    <title>Arreglos</title>
+</head>
+<body>
+    <h1>Arreglos Con JS</h1>
+    <h2>Veremos lo que son los arreglos con informacion guardada en el local storage</h2>
+    <p>Ya que estamos guardando la informacion en el local storage está permanecera vigente en el navegador que usemos, mas no será universal</p>
+    <p>Haremos un ejemplo con un formulario donde poramos visualizar, capturar, modificar y eliminar la informacion.</p>
+    <form action="#">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="" id="nombre"><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="" id="apellido"><br>
+        <label for="dOB">Fecha de Nacimiento:</label>
+        <input type="date" name="" id="dOB"><br>
+        <label for="cedula">Cedula</label>
+        <input type="numeric" name="" id="cedula"><br>
+        <button type="button" onclick="save()">Guardar</button>
+        <button type="button" onclick="deleteData()">Borrar Base de Datos</button>
+    </form>
+    <label for="borrarCedula">Ingresa el # de CC a borrar</label>
+    <input type="numeric" id="borrarCedula">
+    <button type="button" onclick="searchDelete()">Borrar</button>
+    <section>
+        <h3>Datos Guardados:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de Nac.</th>
+                    <th>Cedula</th>
+                    <th>Edicion</th>
+                </tr>
+            </thead>
+            <tbody id="dataStored">
+
+            </tbody>
+        </table>
+    </section>
+    
+</body>
+</html>
