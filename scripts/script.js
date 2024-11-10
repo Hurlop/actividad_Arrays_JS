@@ -34,49 +34,57 @@ var save = function(){
     var lastname = document.getElementById("apellido").value
     var dOB = document.getElementById("dOB").value
     var cedula = document.getElementById("cedula").value
-    //Los datos capturados son guardados en un objeto con nombre person
-    var person = {
-        name : name,
-        lastname : lastname,
-        dOB : dOB,
-        cedula : cedula
+
+    if(name == "" || lastname == "" || dOB == "" || cedula == ""){
+        alert("Uno o mas campos está vacio")
+    } else {
+        //Los datos capturados son guardados en un objeto con nombre person
+        var person = {
+            name : name,
+            lastname : lastname,
+            dOB : dOB,
+            cedula : cedula
+        }
+        //creamos una variable para encontrar el index de un valor buscando por cedula
+        var position = data.findIndex((item) => item.cedula == cedula)
+        //Para que los registros no se repitan necesitamos comparar los valores
+        //Cuando se usa la funcion findIndex se busca indice por indice si hay una coincidencia
+        //Si NO la hay significa que es un registro nuevo y arrojará un valor de -1 
+        //A lo que se insertará el valor dentro del locaStorage
+        if(position == -1){
+            data.push(person)
+            //para insertar el valor dentro del localStorage y que no quede como objeto, debemos
+            //Volver el valor una cadena caracteres y se usa la funcion "stringify"
+            localStorage.setItem("data",JSON.stringify(data))
+            alert("Registro Guardado Correctamente")
+            //despues de guardar los datos para que se actualice la pagina
+            //Ejecutamos la funcion "loadData" que nos permite cargar nevamente todos los registros
+            loadData() 
+        }
+        if(position != -1){
+            //Por el contrario si encuentra un registro y este valor es distinto a -1 es decir si hay coincidencias
+            //El registro no se completará porque hay una coincidencia
+            alert("Este Registro Ya Existe")
+        }
     }
-    //creamos una variable para encontrar el index de un valor buscando por cedula
-    var position = data.findIndex((item) => item.cedula == cedula)
-    //Para que los registros no se repitan necesitamos comparar los valores
-    //Cuando se usa la funcion findIndex se busca indice por indice si hay una coincidencia
-    //Si NO la hay significa que es un registro nuevo y arrojará un valor de -1 
-    //A lo que se insertará el valor dentro del locaStorage
-    if(position == -1){
-        data.push(person)
-        //para insertar el valor dentro del localStorage y que no quede como objeto, debemos
-        //Volver el valor una cadena caracteres y se usa la funcion "stringify"
-        localStorage.setItem("data",JSON.stringify(data))
-        alert("Registro Guardado Correctamente")
-        //despues de guardar los datos para que se actualice la pagina
-        //Ejecutamos la funcion "loadData" que nos permite cargar nevamente todos los registros
-        loadData() 
-    }
-    if(position != -1){
-        //Por el contrario si encuentra un registro y este valor es distinto a -1 es decir si hay coincidencias
-        //El registro no se completará porque hay una coincidencia
-        alert("Este Registro Ya Existe")
-    }
-    
 }
 //Crearemos la funcion de barra de busqueda para mostrar por medio de un alert la info de una cc consultada
 var searchCc = function(){
     var cedulaEntered = document.getElementById("searchBar").value
-    var position = data.findIndex((item) => item.cedula == cedulaEntered)
-    if(position != -1){
-        alert(  "La persona encontrada es: " + " " +
-                "Nombre: " + data[position].name + " " +
-                "Apellido: " + data[position].lastname + " " + 
-                "Fecha de Nacimiento: " + data[position].dOB + " " +
-                "Cedula: " + data[position].cedula)
-    }
-    if(position == -1){
-        alert("No encontre ningun registro con la cedula ingresada.")
+    if(cedulaEntered == ""){
+        alert("El campo está vacio")
+    } else {
+        var position = data.findIndex((item) => item.cedula == cedulaEntered)
+        if(position != -1){
+            alert(  "La persona encontrada es: " + " " +
+                    "Nombre: " + data[position].name + " " +
+                    "Apellido: " + data[position].lastname + " " + 
+                    "Fecha de Nacimiento: " + data[position].dOB + " " +
+                    "Cedula: " + data[position].cedula)
+        }
+        if(position == -1){
+            alert("No encontre ningun registro con la cedula ingresada.")
+        }
     }
 }
 //Esta funcion nos permite borrar todos los datos alojados en el localStorage
@@ -91,16 +99,20 @@ var searchDelete = function(){
     var deleteCedula = document.getElementById("borrarCedula").value
     //Realizamos la busqueda con la funcion "findIndex" para que la posicion en la que encuentre
     //El numero de cedula quede en exa variable.
-    var position = data.findIndex((item) => item.cedula == deleteCedula)
-    if (position != -1) {
-        //Usamos la funcion "splice" para eliminar el registro encontrado
-        data.splice(position,1)
-        //Actualizamos el localStorage ya habiendo eliminado el registro, NO antes
-        localStorage.setItem("data",JSON.stringify(data))
-        alert("El registro fue eliminado correctamente.")
-    }
-    if (position == -1) {
-        alert("Esta cedula NO existe.")
+    if (deleteCedula == "") {
+        alert("El campo está vacio")
+    } else {
+        var position = data.findIndex((item) => item.cedula == deleteCedula)
+        if (position != -1) {
+            //Usamos la funcion "splice" para eliminar el registro encontrado
+            data.splice(position,1)
+            //Actualizamos el localStorage ya habiendo eliminado el registro, NO antes
+            localStorage.setItem("data",JSON.stringify(data))
+            alert("El registro fue eliminado correctamente.")
+        }
+        if (position == -1) {
+            alert("Esta cedula NO existe.")
+        }
     }
 }
 //crearemos la funcion de eliminar dentro de la tabla que consulta datos
