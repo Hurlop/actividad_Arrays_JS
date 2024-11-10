@@ -1,0 +1,51 @@
+body{
+    background-color: aquamarine;
+}
+.container{
+    padding: 25px;
+    font-family: "Sour Gummy", sans-serif;
+}
+h1, h2{
+    color:brown;
+    text-align: center;
+}
+h3{
+    color: green;
+}
+input{
+    height: 15px;
+    margin: 5px;
+}
+button{
+    height: 25px;
+    font-family: "Sour Gummy", sans-serif;
+}
+button:hover{
+    cursor: pointer;
+}
+table{
+    border: 2px dotted yellow;
+}
+th ,td{
+    padding: 8px;
+}
+.bntEliminar{
+    color: red;
+    border-color: red;
+}
+.info{
+    display:flex;
+    text-align: center;
+}
+.form_busqueda{
+    display: flex;
+    justify-content: space-around;
+}
+.borrarCC{
+    display:grid;
+    margin: 20px;
+}
+.datosGuardados{
+    display: flex;
+    justify-content: space-around;
+}

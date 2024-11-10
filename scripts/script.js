@@ -22,8 +22,8 @@ var loadData = function(){
                                                         <td>${data[position].name}</td>
                                                         <td>${data[position].lastname}</td>
                                                         <td>${data[position].dOB}</td>
-                                                        <td>${data[position].cedula}</td>
-                                                        <td><button type="button" onclick="delete()">Eliminar</button></td>
+                                                        <td id="cedulaTable">${data[position].cedula}</td>
+                                                        <td><button type="button" class="bntEliminar" onclick="deleteOnTable(${position})">Eliminar</button></td>
                                                     </tr>`
     }
 } 
@@ -102,6 +102,13 @@ var searchDelete = function(){
     if (position == -1) {
         alert("Esta cedula NO existe.")
     }
+}
+//crearemos la funcion de eliminar dentro de la tabla que consulta datos
+var deleteOnTable = function(position){
+    data.splice(position,1)
+    localStorage.setItem("data",JSON.stringify(data))
+    alert("El registro fue eliminado correctamente.")
+    loadData()
 }
 //Llamamos la funcion de cargar datos para siempre tener la pagina sincronizada
 loadData()
