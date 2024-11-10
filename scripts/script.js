@@ -64,6 +64,21 @@ var save = function(){
     }
     
 }
+//Crearemos la funcion de barra de busqueda para mostrar por medio de un alert la info de una cc consultada
+var searchCc = function(){
+    var cedulaEntered = document.getElementById("searchBar").value
+    var position = data.findIndex((item) => item.cedula == cedulaEntered)
+    if(position != -1){
+        alert(  "La persona encontrada es: " + " " +
+                "Nombre: " + data[position].name + " " +
+                "Apellido: " + data[position].lastname + " " + 
+                "Fecha de Nacimiento: " + data[position].dOB + " " +
+                "Cedula: " + data[position].cedula)
+    }
+    if(position == -1){
+        alert("No encontre ningun registro con la cedula ingresada.")
+    }
+}
 //Esta funcion nos permite borrar todos los datos alojados en el localStorage
 //Junto con los datos que tenemos en el array por nombre "data" 
 var deleteData = function(){
